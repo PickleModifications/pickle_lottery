@@ -56,9 +56,102 @@ function CheckPermission(source, permission)
 end
 
 -- Society Funds
+--
+-- QBCore moved society money out of qb-management into qb-banking, while
+-- QBox-family servers most commonly use Renewed-Banking. To stay compatible
+-- across all three (and avoid a script error when the configured/legacy
+-- resource is missing), we lazy-resolve which one to talk to on first call
+-- and cache the resulting add/remove closures. Server owners can also pin a
+-- specific resource via Config.Lottery.societyResource.
+
+local SocietyAdd, SocietyRemove
+local societyResolved = false
+local societyWarned = false
+
+local function isStarted(name)
+    return GetResourceState(name) == 'started'
+end
+
+local function resolveSocietyHandlers()
+    local pinned = Config and Config.Lottery and Config.Lottery.societyResource
+    pinned = (type(pinned) == 'string') and pinned or 'auto'
+
+    if pinned == 'none' then
+        return nil, nil, 'disabled by config'
+    end
+
+    -- Ordered candidates. Renewed-Banking is checked first because it's the
+    -- typical QBox setup and most QB servers that have it intentionally use
+    -- it instead of qb-banking. qb-management is the legacy fallback.
+    local candidates
+    if pinned == 'auto' then
+        candidates = { 'Renewed-Banking', 'qb-banking', 'qb-management' }
+    else
+        candidates = { pinned }
+    end
+
+    for _, res in ipairs(candidates) do
+        if isStarted(res) then
+            if res == 'Renewed-Banking' then
+                return
+                    function(name, amount) exports['Renewed-Banking']:addAccountMoney(name, amount) end,
+                    function(name, amount) exports['Renewed-Banking']:removeAccountMoney(name, amount) end,
+                    res
+            elseif res == 'qb-banking' then
+                return
+                    function(name, amount) exports['qb-banking']:AddMoney(name, amount, 'pickle_lottery') end,
+                    function(name, amount) exports['qb-banking']:RemoveMoney(name, amount, 'pickle_lottery') end,
+                    res
+            elseif res == 'qb-management' then
+                return
+                    function(name, amount) exports['qb-management']:AddMoney(name, amount) end,
+                    function(name, amount) exports['qb-management']:RemoveMoney(name, amount) end,
+                    res
+            end
+        end
+    end
+
+    return nil, nil, 'no compatible banking resource started'
+end
+
+local function ensureSocietyHandlers()
+    if societyResolved then return end
+    societyResolved = true
+    local add, remove, source = resolveSocietyHandlers()
+    SocietyAdd, SocietyRemove = add, remove
+    if add then
+        print(('[pickle_lottery] Society money routed through %s.'):format(source))
+    elseif not societyWarned then
+        societyWarned = true
+        print(('[pickle_lottery] Society payouts disabled: %s. Set Config.Lottery.societyResource if your banking resource has a non-standard name.'):format(source or 'unknown'))
+    end
+end
+
+-- Resolve at startup so the routing print shows up immediately in the
+-- server console, instead of only on the first lottery purchase. Brief
+-- wait gives the banking resource a chance to start if it loads after
+-- pickle_lottery in the manifest order.
+CreateThread(function()
+    Wait(2000)
+    ensureSocietyHandlers()
+end)
 
 function AddSocietyMoney(name, amount)
-    exports["qb-management"]:AddMoney(name, amount)
+    ensureSocietyHandlers()
+    if not SocietyAdd then return end
+    local ok, err = pcall(SocietyAdd, name, amount)
+    if not ok then
+        print(('[pickle_lottery] AddSocietyMoney(%s, %s) failed: %s'):format(tostring(name), tostring(amount), tostring(err)))
+    end
+end
+
+function RemoveSocietyMoney(name, amount)
+    ensureSocietyHandlers()
+    if not SocietyRemove then return end
+    local ok, err = pcall(SocietyRemove, name, amount)
+    if not ok then
+        print(('[pickle_lottery] RemoveSocietyMoney(%s, %s) failed: %s'):format(tostring(name), tostring(amount), tostring(err)))
+    end
 end
 
 -- Inventory Fallback

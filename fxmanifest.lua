@@ -24,6 +24,7 @@ shared_scripts {
 
 server_scripts {
 	"@mysql-async/lib/MySQL.lua",
+    'core/server.lua',
     'bridge/**/server.lua',
     'modules/**/server.lua',
     'discord.lua',

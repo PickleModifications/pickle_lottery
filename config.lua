@@ -291,6 +291,12 @@ Config.Lottery = {
     redeemExpiration = 7, -- How many days a ticket can be unclaimed before deletion.
     dateFormat = "%m/%d/%Y %I:%M %p", -- Check https://www.lua.org/pil/22.1.html for more information.
     canSocietyLose = false, -- Remove money from society when a player wins.
+    -- Which resource handles society / job bank accounts on QBCore-family
+    -- servers. 'auto' picks the first one of these that's started, in this
+    -- order: Renewed-Banking, qb-banking, qb-management. Set to one of those
+    -- strings to force a specific resource (e.g. you run two and want to
+    -- override the autodetect), or 'none' to disable society payouts.
+    societyResource = 'auto',
 }
 
 Config.Items = {
