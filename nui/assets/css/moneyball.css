@@ -1,0 +1,199 @@
+
+#app-moneyball {
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45vw;
+    height: 24vw;
+}
+
+#am-front, #am-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: white;    
+    transform-origin: 50% 0%;
+    transition: transform 1.7s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+#am-back {
+  transform: rotateY(180deg);
+}
+
+#app-moneyball.flip #am-back {
+    transform: rotateY(0deg);
+}
+
+#app-moneyball.flip #am-front {
+    transform: rotateY(180deg);
+}
+
+.am-header {
+    display: flex;
+    height: 3vw;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5vw;
+}
+
+.am-header img {
+    width: auto;
+    height: 100%;
+    margin-block-start: auto;
+    margin-block-end: auto;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+}
+
+.am-container {
+    display: flex;
+    flex-direction: row;
+    padding: 0 1vw 0 1vw; 
+    height: calc(100% - 5vw);
+}
+
+.amc-section {
+    color: rgb(255, 88, 88);
+}
+.amc-section > div:nth-child(1) {
+    margin-left: 0.1vw;
+    margin-bottom: 0.6vw;
+}
+
+#amc-section-1, #amc-section-2, #amc-section-3, #amc-section-4 {
+    margin-right: 1vw;
+    display: grid;
+    gap: 0.2vw;
+    grid-template-columns: repeat(7,1vw);
+    justify-content: center;
+    margin-bottom: 0.6vw;
+}
+
+#amc-section-1 > div, #amc-section-2 > div, #amc-section-3 > div, #amc-section-4 > div {
+    width: 0.7vw;
+    height: 0.7vw;
+    font-weight: bold;
+    display: flex;
+    border: 0.15vw solid rgb(255, 88, 88);
+    font-size: 0.5vw;
+    justify-content: center;
+    align-items: center;
+    transition: 0.25s;
+}
+
+#amc-section-1 > div:hover, #amc-section-2 > div:hover, #amc-section-3 > div:hover, #amc-section-4 > div:hover {
+    cursor: pointer;
+    background-color: rgb(133, 30, 30);
+    color: white;
+}
+
+#amc-section-1 > div.selected, #amc-section-2 > div.selected, #amc-section-3 > div.selected, #amc-section-4 > div.selected {
+    background-color: rgb(255, 88, 88);
+    color: white;
+}
+
+#amc-ball-1, #amc-ball-2, #amc-ball-3, #amc-ball-4 {
+    margin-top: 0.5vw;
+    margin-right: 1vw;
+    display: grid;
+    gap: 0.2vw;
+    grid-template-columns: repeat(7,1vw);
+    justify-content: center;
+    margin-bottom: 0.6vw;
+}
+
+#amc-ball-1 > div, #amc-ball-2 > div, #amc-ball-3 > div, #amc-ball-4 > div {
+    width: 0.7vw;
+    height: 0.7vw;
+    font-weight: bold;
+    display: flex;
+    border: 0.15vw solid rgb(255, 88, 88);
+    font-size: 0.5vw;
+    justify-content: center;
+    align-items: center;
+    transition: 0.25s;
+}
+
+#amc-ball-1 > div:hover, #amc-ball-2 > div:hover, #amc-ball-3 > div:hover, #amc-ball-4 > div:hover {
+    cursor: pointer;
+    background-color: rgb(133, 30, 30);
+    color: white;
+}
+
+#amc-ball-1 > div.selected, #amc-ball-2 > div.selected, #amc-ball-3 > div.selected, #amc-ball-4 > div.selected {
+    background-color: rgb(255, 88, 88);
+    color: white;
+}
+
+
+.amc-submit {
+    position: absolute;
+    transform: rotateZ(270deg);
+    display: flex;
+    height: 5vw;
+    justify-content: center;
+    align-items: center;
+    right: -6.4vw;
+    top: 9.4vw;
+}
+
+.amc-submit > div:last-child {
+    pointer-events: none;
+    font-size: 0.7vw;
+    position: absolute;
+    margin-bottom: 1vw;
+    color: white;
+}
+
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 8vw solid transparent;
+    border-right: 8vw solid transparent;
+    border-top: 3vw solid rgb(255, 88, 88);
+    transition: 0.25s;
+}
+
+.amc-submit > .arrow-down:hover {
+    border-top: 3vw solid rgb(133, 30, 30);
+    cursor: pointer;
+}
+
+#amb-prizes {
+    font-size: 0.5vw;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    flex: 1 1 0px;
+    margin-bottom: 0.6vw;
+    justify-content: center;
+}
+
+#amb-prizes > div {
+    border: 0.2vw solid rgb(255, 88, 88);
+    width: 12vw;
+}
+
+#amb-prizes > div > div:nth-child(1) {
+    padding: 0.2vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(133, 30, 30);
+    color: white;
+}
+
+#amb-prizes > div > div:nth-child(2) > div {
+    display: flex;
+    padding: 0.1vw;
+}
+
+#amb-prizes > div > div:nth-child(2) > div > div:last-child {
+    margin-left: auto;
+}

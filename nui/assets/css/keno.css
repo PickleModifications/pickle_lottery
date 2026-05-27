@@ -1,0 +1,164 @@
+#app-keno {
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24vw;
+    height: 45vw;
+}
+
+#ak-front, #ak-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: white;    
+    transform-origin: 50% 0%;
+    transition: transform 1.7s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+#ak-back {
+  transform: rotateY(180deg);
+}
+
+#app-keno.flip #ak-back {
+    transform: rotateY(0deg);
+}
+
+#app-keno.flip #ak-front {
+    transform: rotateY(180deg);
+}
+
+.ak-header {
+    display: flex;
+    height: 5vw;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5vw;
+}
+
+.ak-header img {
+    width: auto;
+    height: 100%;
+    margin-block-start: auto;
+    margin-block-end: auto;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+}
+
+.ak-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1vw 0 1vw; 
+    height: calc(100% - 5vw);
+}
+
+.akc-section {
+    color: rgb(255, 88, 88);
+}
+.akc-section > div:nth-child(1) {
+    margin-left: 0.1vw;
+    margin-bottom: 0.6vw;
+}
+
+#akc-section-1, #akc-section-2, #akc-section-3, #akc-section-4 {
+    display: grid;
+    width: 100%;
+    gap: 0.2vw;
+    grid-template-columns: repeat(10, 2vw);
+    justify-content: center;
+    margin-bottom: 0.6vw;
+}
+
+#akc-section-1 > div, #akc-section-2 > div, #akc-section-3 > div, #akc-section-4 > div {
+    font-weight: bold;
+    display: flex;
+    aspect-ratio: 1;
+    width: 1.4vw;
+    border: 0.15vw solid rgb(255, 88, 88);
+    font-size: 1.0vw;
+    margin-right: 0.2vw;
+    margin-bottom: 0.2vw;
+    justify-content: center;
+    align-items: center;
+    transition: 0.25s;
+}
+
+#akc-section-1 > div:hover, #akc-section-2 > div:hover, #akc-section-3 > div:hover, #akc-section-4 > div:hover {
+    cursor: pointer;
+    background-color: rgb(133, 30, 30);
+    color: white;
+}
+
+#akc-section-1 > div.selected, #akc-section-2 > div.selected, #akc-section-3 > div.selected, #akc-section-4 > div.selected {
+    background-color: rgb(255, 88, 88);
+    color: white;
+}
+
+.akc-submit {
+    margin-top: auto;
+    margin-bottom: 0.8vw;
+    display: flex;
+    height: 5vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.akc-submit > div:last-child {
+    pointer-events: none;
+    font-size: 0.7vw;
+    position: absolute;
+    margin-bottom: 1vw;
+    color: white;
+}
+
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 8vw solid transparent;
+    border-right: 8vw solid transparent;
+    border-top: 3vw solid rgb(255, 88, 88);
+    transition: 0.25s;
+}
+
+.akc-submit > .arrow-down:hover {
+    border-top: 3vw solid rgb(133, 30, 30);
+    cursor: pointer;
+}
+
+#akb-prizes {
+    font-size: 0.5vw;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    flex: 1 1 0px;
+    margin-bottom: 0.6vw;
+}
+
+#akb-prizes > div {
+    border: 0.2vw solid rgb(255, 88, 88);
+    flex-grow: 1;
+    width: 6vw;
+}
+
+#akb-prizes > div > div:nth-child(1) {
+    padding: 0.2vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(133, 30, 30);
+    color: white;
+}
+
+#akb-prizes > div > div:nth-child(2) > div {
+    display: flex;
+    padding: 0.1vw;
+}
+
+#akb-prizes > div > div:nth-child(2) > div > div:last-child {
+    margin-left: auto;
+}

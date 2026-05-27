@@ -1,0 +1,56 @@
+@font-face {
+    font-family: Familiar;
+    src: url(../fonts/Familiar-Pro-Bold.otf);
+}
+
+body {
+    background-color: transparent;
+    overflow: hidden;
+    font-size: 1vw;
+    user-select: none;
+}
+
+.text-large {
+    font-size: 1.25vw;
+    margin-block-start: auto;
+    margin-block-end: auto;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    font-weight: bold;
+}
+
+.text-medium {
+    font-size: 0.75vw;
+    margin-block-start: auto;
+    margin-block-end: auto;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    font-weight: bold;
+}
+
+#lottery-prompt {
+    position: absolute;
+    bottom: 2vh;
+    font-family: Familiar;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85vw;
+    background-color: rgb(255, 56, 56);
+    width: fit-content;
+    padding: 0.5vw;
+    cursor: pointer;
+    transition: .5s;
+}
+
+#lottery-prompt.active {
+    opacity: 1;
+}
+
+#lottery-prompt:hover {
+    background-color: rgb(255, 88, 88);
+}

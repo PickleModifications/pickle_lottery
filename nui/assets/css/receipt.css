@@ -1,0 +1,104 @@
+@font-face {
+    font-family: VCR;
+    src: url(../fonts/VCR_OSD_MONO.ttf);
+}
+
+#app-receipt {
+    display: none;
+    font-family: VCR;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20vw;
+    height: 28vw;
+    background-color: white;
+}
+
+.ar-header {
+    display: flex;
+    height:3vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5vw;
+}
+
+.ar-header img {
+    width: auto;
+    height: 3.0vw;
+    padding: 0.5vw;
+}
+
+.ar-header > h1 {
+    font-size: 1.5vw;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding: 0.5vw;
+}
+
+.ar-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1vw 0 1vw; 
+    height: calc(100% - 3vw);
+}
+
+.arc-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1vw;
+}
+
+.arc-row.centered {
+    justify-content: center;
+}
+
+.arc-spots {
+    display: grid;
+    width: 100%;
+    font-size: 1.5vw;
+    gap: 0.5vw;
+    grid-template-columns: repeat(4, 3vw);
+    justify-content: center;
+    justify-items: center;
+}
+
+.arc-spots.moneyball {
+    display: block;
+}
+
+.arc-spots.moneyball > div {
+    display: grid;
+    width: 100%;
+    font-size: 1.25vw;
+    gap: 0.5vw;
+    grid-template-columns: repeat(7, 1.5vw);
+    margin-bottom: 1vw;
+    justify-content: center;
+    justify-items: center;
+}
+
+.arc-barcode {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 1vw;
+    height: 4vw;
+}
+
+.arc-barcode img {
+    width: 100%;
+    height: 2vw;
+}
+.arc-barcode div {
+    width: 100%;
+    height: 2vw;
+    margin-top: 0.25vw;
+    text-align: center;
+}
+
+.receipt-red {
+    color: rgb(255, 88, 88);
+}
