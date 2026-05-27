@@ -3,7 +3,7 @@ lua54 'yes'
 game 'gta5'
 
 name         'pickle_lottery'
-version      '1.2.1'
+version      '1.2.2'
 description  'A fully immersive lottery system.'
 author       'Pickle Mods'
 
